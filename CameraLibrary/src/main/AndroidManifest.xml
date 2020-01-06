@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.yuong.camera">
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <application>
+        <activity
+            android:name=".CameraActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/CameraTheme" />
+        <activity
+            android:name=".PictureSelectorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/PictureSelectorTheme" />
+        <activity
+            android:name=".PicturePreviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/PictureSelectorTheme" />
+    </application>
+
+</manifest>

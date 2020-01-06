@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dp_46">
+
+    <LinearLayout
+        android:id="@+id/time_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:visibility="invisible">
+
+        <View
+            android:id="@+id/view_spot"
+            android:layout_width="@dimen/dp_6"
+            android:layout_height="@dimen/dp_6"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bg_video_spot" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_8"
+            android:text=""
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_12" />
+
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_12">
+
+        <FrameLayout
+            android:id="@+id/capture_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_capture"
+            android:padding="@dimen/dp_6">
+
+            <View
+                android:id="@+id/view_capture"
+                android:layout_width="@dimen/dp_74"
+                android:layout_height="@dimen/dp_74"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bg_btn_capture" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/video_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/view_video"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_80"
+                android:background="@drawable/bg_video" />
+
+            <com.yuong.camera.view.RecordButtonView
+                android:id="@+id/recordButtonView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:view_line_color="#ffffff"
+                app:view_line_width="@dimen/dp_5"
+                app:view_out_line_color="#66ffffff"
+                app:view_radius="@dimen/dp_40" />
+        </FrameLayout>
+    </FrameLayout>
+</LinearLayout>

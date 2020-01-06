@@ -1,0 +1,17 @@
+<resources>
+    <string name="camera_switch">翻转</string>
+    <string name="album">相册</string>
+    <string name="video">拍视频</string>
+    <string name="picture">拍照</string>
+    <string name="next">下一步</string>
+    <string name="cancel">取消</string>
+    <string name="camera_unavailable">相机不可用！</string>
+    <string name="record_time_short">录制时间过短！</string>
+    <string name="picture_image">全部图片</string>
+    <string name="picture_empty">你可以使用相机拍摄照片</string>
+    <string name="picture_data_exception">获取相册数据异常...</string>
+    <string name="picture_size">%1$d张</string>
+    <string name="picture_size_max">最多可选择%1$d张</string>
+    <string name="next2">下一步(%1$d/%2$d)</string>
+    <string name="picture_select_tip">请选择图片！</string>
+</resources>

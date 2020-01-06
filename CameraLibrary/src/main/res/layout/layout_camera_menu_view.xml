@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/camera_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_camera_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_12"
+            android:drawableTop="@mipmap/icon_camera_switch"
+            android:drawablePadding="@dimen/dp_8"
+            android:text="@string/camera_switch"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/tv_album"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_camera_switch"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp_50"
+            android:layout_marginRight="@dimen/dp_12"
+            android:drawableTop="@mipmap/icon_album"
+            android:text="@string/album"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/sp_14"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:id="@+id/iv_camera_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_18"
+            android:layout_marginTop="@dimen/dp_20"
+            android:src="@mipmap/icon_camera_close" />
+
+        <RelativeLayout
+            android:id="@+id/layout_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/dp_50"
+            android:paddingBottom="@dimen/dp_2">
+
+            <TextView
+                android:id="@+id/tv_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/video"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/sp_14" />
+
+            <View
+                android:id="@+id/video_indicator"
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="@dimen/dp_2"
+                android:layout_below="@+id/tv_video"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_8"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/layout_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/dp_50"
+            android:paddingBottom="@dimen/dp_2">
+
+            <TextView
+                android:id="@+id/tv_picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/picture"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/sp_14" />
+
+            <View
+                android:id="@+id/picture_indicator"
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="@dimen/dp_2"
+                android:layout_below="@+id/tv_picture"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_8"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/view_indicator"
+            android:layout_width="@dimen/dp_25"
+            android:layout_height="@dimen/dp_2"
+            android:background="@drawable/bg_indicator" />
+
+    </RelativeLayout>
+
+    <com.yuong.camera.view.CameraButtonView
+        android:id="@+id/cameraButtonView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

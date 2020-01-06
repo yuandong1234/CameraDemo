@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RecordButtonView">
+        <attr name="view_out_line_color" format="color" />
+        <attr name="view_line_color" format="color" />
+        <attr name="view_radius" format="dimension" />
+        <attr name="view_line_width" format="dimension" />
+    </declare-styleable>
+</resources>
