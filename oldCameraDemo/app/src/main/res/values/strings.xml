@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CustomCamera</string>
+    <!--<string name="record_time">%1$f | %2$f </string>-->
+</resources>

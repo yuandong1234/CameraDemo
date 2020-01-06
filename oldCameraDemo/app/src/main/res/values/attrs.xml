@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleTextProgressbar">
+        <attr name="progressbar_out_line_color" format="color" />
+        <attr name="progressbar_line_color" format="color" />
+        <attr name="progressbar_radius" format="dimension" />
+        <attr name="progressbar_line_width" format="dimension" />
+    </declare-styleable>
+</resources>

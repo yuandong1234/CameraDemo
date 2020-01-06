@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="46dp">
+
+    <LinearLayout
+        android:id="@+id/ll_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:visibility="invisible">
+
+        <View
+            android:id="@+id/view_video_spot"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/bg_video_spot" />
+
+        <TextView
+            android:id="@+id/tv_video_time"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:text="9 | 15"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp">
+
+        <FrameLayout
+            android:id="@+id/layout_capture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_capture"
+            android:padding="6dp">
+
+            <View
+                android:id="@+id/view_capture"
+                android:layout_width="74dp"
+                android:layout_height="74dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bg_btn_capture" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/layout_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/view_video"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/bg_video" />
+
+            <com.yuong.camera.RecordProgressView
+                android:id="@+id/recordProgressView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:progressbar_line_color="#ffffff"
+                app:progressbar_line_width="5dp"
+                app:progressbar_out_line_color="#66ffffff"
+                app:progressbar_radius="40dp" />
+        </FrameLayout>
+    </FrameLayout>
+</LinearLayout>
