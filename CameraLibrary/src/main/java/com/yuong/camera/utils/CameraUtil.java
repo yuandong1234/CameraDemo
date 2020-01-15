@@ -8,7 +8,11 @@ import android.view.WindowManager;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
+
+import static android.hardware.Camera.CameraInfo;
+import static android.hardware.Camera.getCameraInfo;
 
 public class CameraUtil {
     private static final String TAG = CameraUtil.class.getSimpleName();
@@ -84,7 +88,7 @@ public class CameraUtil {
         }
     }
 
-    public Camera.Size getVideoSize(List<Camera.Size> list, float th, float tw,float adjustH) {
+    public Camera.Size getVideoSize(List<Camera.Size> list, float th, float tw, float adjustH) {
         float rate = th / tw;
         Collections.sort(list, sizeComparator);
         int i = 0;
@@ -117,8 +121,8 @@ public class CameraUtil {
     }
 
     public int getCameraDisplayOrientation(Context context, int cameraId) {
-        Camera.CameraInfo info = new Camera.CameraInfo();
-        Camera.getCameraInfo(cameraId, info);
+        CameraInfo info = new CameraInfo();
+        getCameraInfo(cameraId, info);
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         int rotation = wm.getDefaultDisplay().getRotation();
         int degrees = 0;
@@ -137,7 +141,7 @@ public class CameraUtil {
                 break;
         }
         int result;
-        if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+        if (info.facing == CameraInfo.CAMERA_FACING_FRONT) {
             result = (info.orientation + degrees) % 360;
             result = (360 - result) % 360;   // compensate the mirror
         } else {
@@ -145,5 +149,122 @@ public class CameraUtil {
             result = (info.orientation - degrees + 360) % 360;
         }
         return result;
+    }
+
+    /**
+     * 获得适合的图片分辨率
+     *
+     * @param list
+     * @param th
+     * @param tw
+     * @param maxWidth
+     * @return
+     */
+    public Camera.Size getBestPictureSize2(List<Camera.Size> list, float th, float tw, float maxWidth) {
+        final double ASPECT_TOLERANCE = 0.1;
+        double targetRatio = (double) tw / (double) th;
+        Camera.Size optimalSize = null;
+
+        Collections.sort(list, sizeComparator);
+
+        StringBuilder builder = new StringBuilder();
+        for (Camera.Size supportedPicResolution : list) {
+            double rate = (double) supportedPicResolution.height / (double) supportedPicResolution.width;
+            builder.append("\n")
+                    .append(supportedPicResolution.width)
+                    .append('x')
+                    .append(supportedPicResolution.height)
+                    .append("   rate : " + rate);
+        }
+
+        Log.i(TAG, "Supported picture size: " + builder.toString());
+        Log.i(TAG, "targetRatio " + targetRatio);
+        Iterator<Camera.Size> it = list.iterator();
+
+        while (it.hasNext()) {
+            Camera.Size size = it.next();
+            int width = size.width;
+            int height = size.height;
+
+            // 在camera分辨率与屏幕分辨率宽高比不相等的情况下，找出差距最小的一组分辨率
+            // 由于camera的分辨率是width>height，我们设置的portrait模式中，width<height
+            // 因此这里要先交换然后在比较宽高比
+
+            double ratio = (double) height / (double) width;
+            double diff = Math.abs(ratio - targetRatio);
+            if (height > maxWidth || diff > ASPECT_TOLERANCE) {
+                it.remove();
+            }
+        }
+
+        StringBuilder builder2 = new StringBuilder();
+        for (Camera.Size supportedPicResolution : list) {
+            builder2.append("\n")
+                    .append(supportedPicResolution.width)
+                    .append('x')
+                    .append(supportedPicResolution.height);
+
+        }
+
+        Log.i(TAG, "Supported picture size2: " + builder2.toString());
+
+        // 如果没有找到合适的，并且还有候选的像素，对于照片，则取其中最大比例的，而不是选择与屏幕分辨率相同的
+        if (!list.isEmpty()) {
+            optimalSize = list.get(list.size() - 1);
+            Log.e(TAG, "picture size:  width : " + optimalSize.width + "  height : " + optimalSize.height);
+        }
+
+        return optimalSize;
+    }
+
+    /**
+     * 获得适合的图片分辨率
+     *
+     * @param list
+     * @param th
+     * @param tw
+     * @param maxWidth 最大图片的宽度
+     * @return
+     */
+    public Camera.Size getBestPictureSize(List<Camera.Size> list, float th, float tw, float maxWidth) {
+        final double ASPECT_TOLERANCE = 0.1;
+        double targetRatio = (double) tw / (double) th;
+        Camera.Size optimalSize = null;
+        double minDiff = Double.MAX_VALUE;
+
+        Collections.sort(list, sizeComparator);
+
+        StringBuilder builder = new StringBuilder();
+        for (Camera.Size supportedPicResolution : list) {
+            double rate = (double) supportedPicResolution.height / (double) supportedPicResolution.width;
+            builder.append("\n")
+                    .append(supportedPicResolution.width)
+                    .append('x')
+                    .append(supportedPicResolution.height)
+                    .append("   rate : " + rate);
+        }
+
+        Log.i(TAG, "Supported picture size: " + builder.toString());
+        Log.i(TAG, "targetRatio " + targetRatio);
+
+        for (Camera.Size size : list) {
+            double ratio = (double) size.height / size.width;
+            if (Math.abs(ratio - targetRatio) > ASPECT_TOLERANCE) continue;
+            Log.i(TAG, " size width : " + size.width + "  height : " + size.height);
+            if (size.height <= maxWidth) {
+                optimalSize = size;
+            }
+        }
+
+        if (optimalSize == null) {
+            for (Camera.Size size : list) {
+                if (Math.abs(size.height - maxWidth) < minDiff) {
+                    optimalSize = size;
+                    minDiff = Math.abs(size.height - maxWidth);
+                }
+            }
+        }
+        Log.e(TAG, "picture size:  width : " + optimalSize.width + "  height : " + optimalSize.height);
+        return optimalSize;
     }
 }

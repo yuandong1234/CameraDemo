@@ -136,7 +136,8 @@ public class CameraService implements ICamera, Camera.PreviewCallback {
             try {
                 mParams = mCamera.getParameters();
                 Camera.Size previewSize = CameraUtil.getInstance().getPreviewSize(mParams.getSupportedPreviewSizes(), height, width);
-                Camera.Size pictureSize = CameraUtil.getInstance().getPictureSize(mParams.getSupportedPictureSizes(), height, width);
+//                Camera.Size pictureSize = CameraUtil.getInstance().getPictureSize(mParams.getSupportedPictureSizes(), height, width);
+                Camera.Size pictureSize = CameraUtil.getInstance().getBestPictureSize(mParams.getSupportedPictureSizes(), height, width, mWidth);
 
                 mParams.setPreviewSize(previewSize.width, previewSize.height);
                 Log.i(TAG, "preview_width : " + previewSize.width + "  preview_height : " + previewSize.height);
@@ -144,9 +145,11 @@ public class CameraService implements ICamera, Camera.PreviewCallback {
                 mPreviewWidth = previewSize.width;
                 mPreviewHeight = previewSize.height;
 
-                mParams.setPictureSize(pictureSize.width, pictureSize.height);
-
-                Log.i(TAG, "picture_width : " + pictureSize.width + "  picture_height : " + pictureSize.height);
+                if (pictureSize != null) {
+                    mParams.setPictureSize(pictureSize.width, pictureSize.height);
+                } else {
+                    mParams.setPictureSize(1280, 720);//找不到合适的分辨率，则用通用的分辨率
+                }
 
                 if (isSupportedFocusMode(mParams.getSupportedFocusModes(), Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE)) {
                     mParams.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
